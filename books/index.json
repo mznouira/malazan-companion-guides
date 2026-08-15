@@ -1,23 +1,72 @@
 [
   {
-    "id": "gotm",
+    "id": "gardens-of-the-moon",
     "num": 1,
     "title": "Gardens of the Moon",
-    "file": "books/1-gotm.json",
+    "file": "books/1-gardens-of-the-moon.json",
     "chapters": 27
   },
   {
-    "id": "dg",
+    "id": "deadhouse-gates",
     "num": 2,
     "title": "Deadhouse Gates",
-    "file": "books/2-dg.json",
+    "file": "books/2-deadhouse-gates.json",
     "chapters": 27
   },
   {
-    "id": "moi",
+    "id": "memories-of-ice",
     "num": 3,
     "title": "Memories of Ice",
-    "file": "books/3-moi.json",
+    "file": "books/3-memories-of-ice.json",
     "chapters": 28
+  },
+  {
+    "id": "house-of-chains",
+    "num": 4,
+    "title": "House of Chains",
+    "file": "books/4-house-of-chains.json",
+    "chapters": 29
+  },
+  {
+    "id": "midnight-tides",
+    "num": 5,
+    "title": "Midnight Tides",
+    "file": "books/5-midnight-tides.json",
+    "chapters": 28
+  },
+  {
+    "id": "bonehunters",
+    "num": 6,
+    "title": "Bonehunters",
+    "file": "books/6-bonehunters.json",
+    "chapters": 29
+  },
+  {
+    "id": "reaper-s-gale",
+    "num": 7,
+    "title": "Reaper's Gale",
+    "file": "books/7-reaper-s-gale.json",
+    "chapters": 29
+  },
+  {
+    "id": "toll-the-hounds",
+    "num": 8,
+    "title": "Toll The Hounds",
+    "file": "books/8-toll-the-hounds.json",
+    "chapters": 27
+  },
+  {
+    "id": "dust-of-dreams",
+    "num": 9,
+    "title": "Dust of Dreams",
+    "file": "books/9-dust-of-dreams.json",
+    "chapters": 26
+  },
+  {
+    "id": "the-cripple-god",
+    "num": 10,
+    "title": "The Cripple God",
+    "file": "books/10-the-cripple-god.json",
+    "chapters": 2
   }
 ]

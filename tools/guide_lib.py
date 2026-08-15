@@ -14,7 +14,10 @@ try:
     import pymupdf
     from PIL import Image
 except ImportError:
-    sys.exit("Missing dependencies. Run:  pip install pymupdf pillow")
+    sys.exit(
+        "Missing dependencies. Install with pipx, then run this script "
+        "with that environment's Python — see README.md (Adding a book)."
+    )
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BULLETS = "\u25cf\u25cb\u25a0\u25a1\u25aa\u25ab\u2022\u25c6\u2756\u2023\u2043\u25b8"
@@ -319,7 +322,7 @@ def install(pdf_path, title, num, key=None, root=ROOT, quiet=False):
 def register(entry, root=ROOT):
     path = os.path.join(root, "books", "index.json")
     idx = json.load(open(path)) if os.path.exists(path) else []
-    idx = [b for b in idx if b["id"] != entry["id"]]
+    idx = [b for b in idx if b["id"] != entry["id"] and b["num"] != entry["num"]]
     idx.append(entry)
     idx.sort(key=lambda b: b["num"])
     json.dump(idx, open(path, "w"), ensure_ascii=False, indent=2)

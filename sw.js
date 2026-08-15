@@ -1,6 +1,6 @@
 /* Malazan guides — offline cache.
    Bump CACHE_VERSION after you add or change any file. */
-const CACHE_VERSION = 'malazan-v1';
+const CACHE_VERSION = 'malazan-v2';
 const SHELL = ['./', './index.html', './manifest.webmanifest',
                './books/index.json', './icons/icon-192.png', './icons/icon-512.png'];
 

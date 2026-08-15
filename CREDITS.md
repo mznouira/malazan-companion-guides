@@ -8,8 +8,8 @@ as Google Slides decks. This repository is a reader for that work, not a
 rewrite of it — the summaries, the scene breakdowns, and the red/orange/blue
 highlighting convention are all his.
 
-- Original decks: <link to the shared Drive folder>
-- r/Malazan thread: <link to the post>
+- Original decks: https://drive.google.com/drive/folders/1NbYzA6NPk3u_osoL3J6P9jFDj6PYMHrQ
+- r/Malazan thread: https://www.reddit.com/r/Malazan/comments/1f4e4hy/malazan_guides_and_pdfs/
 - Tip jar: linked from the first slides of each deck
 
 **Published here with his permission.** If that ever changes, open an issue and

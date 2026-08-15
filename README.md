@@ -3,7 +3,7 @@
 A mobile-first, installable reader for u/sleepinxonxbed's chapter-by-chapter
 companion guides to *The Malazan Book of the Fallen*.
 
-**Live:** https://USERNAME.github.io/malazan-companion-guides/
+**Live:** https://mznouira.github.io/malazan-companion-guides/
 
 - One chapter per screen, large readable type, night and day themes
 - Tap any highlighted name to see every scene it appears in
@@ -50,8 +50,25 @@ You get a real icon, fullscreen, and it works with no signal after the first vis
 
 ## Adding a book
 
+The tools need `pymupdf` and `pillow`. Install them with
+[pipx](https://pipx.pypa.io/) so they stay isolated from the system Python
+(plain `pip install` is blocked on Debian/Ubuntu):
+
 ```bash
-pip install pymupdf pillow
+sudo apt install pipx    # macOS: brew install pipx
+pipx ensurepath
+
+pipx install pymupdf
+pipx inject pymupdf pillow
+```
+
+`ensurepath` may ask you to open a new terminal. Then point `$PY` at the
+pipx environment's Python — the system `python3` will not see these
+packages. `pipx environment` finds the venv on Chromebook (`~/.local/pipx`)
+and on machines that use `~/.local/share/pipx`:
+
+```bash
+PY="$(pipx environment --value PIPX_LOCAL_VENVS)/pymupdf/bin/python"
 ```
 
 ### From the author's Drive folder (preferred)
@@ -61,10 +78,10 @@ with no API key and no login, so the tool pulls the deck itself:
 
 ```bash
 # 1. list the shared folder into books/sources.json
-python3 tools/sync-drive.py --folder "<folder url>" --list
+$PY tools/sync-drive.py --folder "<folder url>" --list
 
 # 2. check the numbering it guessed, then build everything
-python3 tools/sync-drive.py --sync
+$PY tools/sync-drive.py --sync
 ```
 
 `--list` reads Google's folder page, which is undocumented markup and may stop
@@ -73,20 +90,20 @@ URL, and either write `books/sources.json` yourself (the tool prints the format)
 or skip it entirely:
 
 ```bash
-python3 tools/sync-drive.py --deck "<presentation url>" \
+$PY tools/sync-drive.py --deck "<presentation url>" \
         --title "House of Chains" --num 4
 ```
 
 Re-run any deck later to pick up the author's revisions:
 
 ```bash
-python3 tools/sync-drive.py --sync --only house-of-chains
+$PY tools/sync-drive.py --sync --only house-of-chains
 ```
 
 ### From a PDF on disk
 
 ```bash
-python3 tools/add-book.py "4. House of Chains Guide.pdf"
+$PY tools/add-book.py "4. House of Chains Guide.pdf"
 ```
 
 Title and reading-order number come from the filename; override with
