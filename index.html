@@ -194,6 +194,10 @@ html[data-img="off"] .plates{display:none}
 .bk .st{display:flex;justify-content:space-between;gap:10px;font-family:var(--ui);font-size:11.5px;color:var(--dim)}
 .bk .st b{color:var(--tx);font-weight:600}
 .shelf .foot{font-family:var(--ui);font-size:11.5px;color:var(--dim);line-height:1.6;margin-top:22px}
+.shelf .foot p{margin:0 0 12px}
+.shelf .foot a,.shelf .sub a,.hint a{color:var(--acc);text-decoration:none;border-bottom:1px dotted color-mix(in srgb,var(--acc) 50%,transparent)}
+.credits{margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
+.credits h2{font-family:var(--ui);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:600;margin:0 0 10px}
 
 /* ---------- progress + resume ---------- */
 .bookbar{display:flex;align-items:center;gap:10px;padding:2px 16px 12px;font-family:var(--ui);
@@ -271,15 +275,22 @@ html[data-img="off"] .plates{display:none}
       <div class="seg" id="thseg"><button data-t="dark">Night</button><button data-t="light">Day</button></div></div>
     <div class="set-row"><span>Artwork</span>
       <div class="seg" id="imseg"><button data-i="on">Show</button><button data-i="off">Hide</button></div></div>
-    <div class="hint">Guide written by <b>u/sleepinxonxbed</b> for r/Malazan. This is a phone-readable rebuild of that slide deck — same words, same red-name highlighting, reflowed for a small screen. Tap any red name to see everywhere it appears.<br><br>Read one chapter here <i>after</i> you read that chapter in the novel: later chapters contain spoilers.</div>
+    <div class="hint">Guides written by <a href="https://www.reddit.com/user/sleepinxonxbed" target="_blank" rel="noopener">u/sleepinxonxbed</a> (<a href="https://x.com/SonAnomander" target="_blank" rel="noopener">@SonAnomander</a>) for r/Malazan. This is a phone-readable rebuild of his slide decks — same words, same red-name highlighting, reflowed for a small screen. Tap any red name to see everywhere it appears.<br><br>If the guides helped, support him: <a href="https://ko-fi.com/sonanomander" target="_blank" rel="noopener">Ko-fi tip jar</a> · <a href="https://drive.google.com/drive/folders/1NbYzA6NPk3u_osoL3J6P9jFDj6PYMHrQ" target="_blank" rel="noopener">original decks</a> · <a href="https://www.reddit.com/r/Malazan/comments/1f4e4hy/malazan_guides_and_pdfs/" target="_blank" rel="noopener">r/Malazan thread</a>.<br><br>Buy the novels — they’re the real thing, this is only a companion — from <a href="https://bookshop.org/search?keywords=Malazan+Book+of+the+Fallen+Steven+Erikson" target="_blank" rel="noopener">Bookshop</a> (indie stores) or your local bookshop. Series by <b>Steven Erikson</b>.<br><br>Read one chapter here <i>after</i> you read that chapter in the novel: later chapters contain spoilers.<br><br>This reader was built with help from AI models. The guide text is all his.</div>
   </div>
 </section>
 
 <div class="shelf" id="shelf"><div class="shelf-in">
   <h1>Malazan companion guides</h1>
-  <div class="sub">Chapter-by-chapter notes by u/sleepinxonxbed, rebuilt for reading on a phone. Each book keeps its own place.</div>
+  <div class="sub">Chapter-by-chapter notes by <a href="https://www.reddit.com/user/sleepinxonxbed" target="_blank" rel="noopener">u/sleepinxonxbed</a>, rebuilt for reading on a phone. Each book keeps its own place.</div>
   <div id="bklist"></div>
-  <div class="foot">Read a chapter here only after you've read it in the novel — later chapters spoil.</div>
+  <div class="foot credits">
+    <h2>Credits &amp; support</h2>
+    <p>Read a chapter here only after you've read it in the novel — later chapters spoil.</p>
+    <p>Every summary is by <a href="https://www.reddit.com/user/sleepinxonxbed" target="_blank" rel="noopener">u/sleepinxonxbed</a> (<a href="https://x.com/SonAnomander" target="_blank" rel="noopener">@SonAnomander</a>). This app is a phone reader for his work, not a rewrite. <a href="https://drive.google.com/drive/folders/1NbYzA6NPk3u_osoL3J6P9jFDj6PYMHrQ" target="_blank" rel="noopener">Original decks</a> · <a href="https://www.reddit.com/r/Malazan/comments/1f4e4hy/malazan_guides_and_pdfs/" target="_blank" rel="noopener">r/Malazan thread</a>.</p>
+    <p>If the guides helped, tip him on <a href="https://ko-fi.com/sonanomander" target="_blank" rel="noopener">Ko-fi</a> — that’s the link on the first slides of each deck.</p>
+    <p>Buy the novels from <a href="https://bookshop.org/search?keywords=Malazan+Book+of+the+Fallen+Steven+Erikson" target="_blank" rel="noopener">Bookshop</a> (goes to indie stores) or your local bookshop. <i>The Malazan Book of the Fallen</i> is by <b>Steven Erikson</b>.</p>
+    <p>This reader was built with help from AI models. The guide text is all his.</p>
+  </div>
 </div></div>
 <div class="toast" id="toast"></div>
 <div class="lb" id="lb"><img id="lbimg" alt=""></div>

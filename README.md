@@ -11,9 +11,11 @@ companion guides to *The Malazan Book of the Fallen*.
 - Remembers your place per book; chapters tick off as you finish them
 - Installs to your home screen and works with no signal
 
-Guides written by **u/sleepinxonxbed** and used with permission — see
-[CREDITS.md](CREDITS.md). Read a chapter here only *after* you've read it in
-the novel.
+Guides written by **u/sleepinxonxbed** (@SonAnomander). Tip him on
+[Ko-fi](https://ko-fi.com/sonanomander); buy the novels from a bookshop.
+This reader was built with help from AI models — the guide text is all his.
+See [CREDITS.md](CREDITS.md). Read a chapter here only *after* you've read
+it in the novel.
 
 ---
 
