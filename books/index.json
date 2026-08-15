@@ -1,0 +1,23 @@
+[
+  {
+    "id": "gotm",
+    "num": 1,
+    "title": "Gardens of the Moon",
+    "file": "books/1-gotm.json",
+    "chapters": 27
+  },
+  {
+    "id": "dg",
+    "num": 2,
+    "title": "Deadhouse Gates",
+    "file": "books/2-dg.json",
+    "chapters": 27
+  },
+  {
+    "id": "moi",
+    "num": 3,
+    "title": "Memories of Ice",
+    "file": "books/3-moi.json",
+    "chapters": 28
+  }
+]

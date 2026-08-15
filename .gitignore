@@ -1,0 +1,6 @@
+# scratch produced by the conversion tools
+img/
+*.pdf
+tools/__pycache__/
+.DS_Store
+Thumbs.db

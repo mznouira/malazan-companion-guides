@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f1217">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Malazan">
+<title>Malazan Companion Guides</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>
+:root{
+  --bg:#0f1217; --sur:#161a21; --sur2:#1d222b; --line:#2b323d;
+  --tx:#dce0e7; --dim:#8f99a8; --nm:#f4705f; --pl:#e6a63c; --nt:#7fb2ea;
+  --acc:#f4705f; --sel:#2a3442;
+  --fs:17px; --lh:1.62;
+  --ui:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --sf:"Iowan Old Style","Palatino Linotype",Palatino,"Charter","Source Serif Pro",Georgia,"Noto Serif",serif;
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+html[data-theme="light"]{
+  --bg:#eae7e0; --sur:#f6f4ef; --sur2:#efece5; --line:#d3cec3;
+  --tx:#191c22; --dim:#5f6874; --nm:#ab2f22; --pl:#8d5a08; --nt:#1f5691;
+  --acc:#ab2f22; --sel:#e2ddd1;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--tx); font-family:var(--sf);
+  font-size:var(--fs); line-height:var(--lh);
+  -webkit-text-size-adjust:100%; overflow-wrap:break-word;
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
+
+/* ---------- top bar ---------- */
+.bar{
+  position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+}
+.bar-in{display:flex;align-items:center;gap:2px;padding:8px 6px;max-width:44rem;margin:0 auto}
+.ib{width:42px;height:42px;display:grid;place-items:center;border-radius:10px;color:var(--dim)}
+.ib:active{background:var(--sur2)}
+.ib svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.where{flex:1;min-width:0;text-align:center;font-family:var(--ui);line-height:1.2}
+.where b{display:block;font-size:14px;font-weight:600;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.where span{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+#prog{height:2px;background:var(--acc);width:0;transition:width .12s linear}
+
+/* ---------- reader ---------- */
+main{max-width:44rem;margin:0 auto;padding:0 18px 130px}
+.chead{padding:34px 0 6px;border-bottom:1px solid var(--line);margin-bottom:26px}
+.chead .eyebrow{font-family:var(--ui);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
+.chead h1{font-size:2.05em;line-height:1.1;margin:.28em 0 .34em;font-weight:600;letter-spacing:-.01em}
+.chead .meta{font-family:var(--ui);font-size:12px;color:var(--dim);padding-bottom:14px}
+
+.card{margin:0 0 34px;scroll-margin-top:64px}
+.card h2{
+  font-size:1.06em;font-weight:600;line-height:1.32;margin:0 0 .7em;
+  padding-left:13px;border-left:3px solid var(--acc);
+}
+.card h2 .sc{display:block;font-family:var(--ui);font-size:10px;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--dim);font-weight:600;margin-bottom:3px}
+.card h3{font-size:.98em;font-weight:600;margin:1.2em 0 .4em}
+
+ul.b{list-style:none;margin:0;padding:0}
+ul.b li{position:relative;padding-left:17px;margin:0 0 .55em}
+ul.b li::before{content:"";position:absolute;left:2px;top:.62em;width:5px;height:5px;
+  border-radius:50%;background:var(--dim);opacity:.75}
+ul.b li.l1{padding-left:34px;font-size:.96em;color:color-mix(in srgb,var(--tx) 88%,var(--bg))}
+ul.b li.l1::before{left:19px;width:4px;height:4px;border-radius:0;background:none;
+  border:1px solid var(--dim);top:.6em}
+ul.b li.l2{padding-left:51px;font-size:.93em;color:var(--dim)}
+ul.b li.l2::before{left:36px;width:6px;height:1px;border-radius:0;background:var(--dim);top:.85em}
+p.tx{margin:0 0 .7em}
+blockquote{
+  margin:1em 0;padding:.1em 0 .1em 15px;border-left:2px solid var(--line);
+  font-size:.95em;color:color-mix(in srgb,var(--tx) 82%,var(--bg));font-style:italic;
+}
+blockquote .it{font-style:italic}
+
+.nm{color:var(--nm);font-weight:600;cursor:pointer;border-bottom:1px dotted color-mix(in srgb,var(--nm) 45%,transparent)}
+.pl{color:var(--pl);font-weight:600}
+.nt{color:var(--nt);font-size:.94em}
+.mu{color:var(--dim)}
+.ac{color:var(--pl)}
+.bd{font-weight:700}
+.it{font-style:italic}
+
+/* ---------- images ---------- */
+.plates{display:flex;gap:9px;overflow-x:auto;margin:.9em -18px 1.1em;padding:0 18px 6px;
+  scroll-snap-type:x mandatory;scrollbar-width:none}
+.plates::-webkit-scrollbar{display:none}
+.plates.one{display:block;margin-inline:0;padding-inline:0}
+.plate{flex:0 0 auto;scroll-snap-align:center;border-radius:9px;overflow:hidden;
+  background:var(--sur2);border:1px solid var(--line);line-height:0}
+.plates.one .plate{max-width:100%;display:inline-block}
+.plate img{display:block;height:190px;width:auto;max-width:none}
+.plates.one .plate img{height:auto;width:100%;max-width:340px}
+html[data-img="off"] .plates{display:none}
+
+/* ---------- bottom nav ---------- */
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:35;
+  background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);padding-bottom:var(--safe-b)}
+.pager-in{max-width:44rem;margin:0 auto;display:flex;gap:8px;padding:9px 12px}
+.pg{flex:1;display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:11px;
+  background:var(--sur);font-family:var(--ui);font-size:12.5px;color:var(--dim);min-width:0}
+.pg:active{background:var(--sur2)}
+.pg[disabled]{opacity:.32}
+.pg.next{justify-content:flex-end;text-align:right}
+.pg b{display:block;color:var(--tx);font-size:13px;font-weight:600;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.pg .t{min-width:0}
+.pg svg{width:17px;height:17px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- sheets ---------- */
+.scrim{position:fixed;inset:0;z-index:50;background:rgba(4,6,10,.55);opacity:0;
+  pointer-events:none;transition:opacity .2s}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;max-height:86vh;
+  background:var(--sur);border-radius:18px 18px 0 0;border-top:1px solid var(--line);
+  transform:translateY(101%);transition:transform .26s cubic-bezier(.2,.8,.3,1);
+  display:flex;flex-direction:column;padding-bottom:var(--safe-b)}
+.sheet.on{transform:none}
+.grip{width:36px;height:4px;border-radius:2px;background:var(--line);margin:9px auto 4px;flex:0 0 auto}
+.sh-head{display:flex;align-items:center;gap:10px;padding:6px 16px 10px;flex:0 0 auto}
+.sh-head h3{margin:0;flex:1;font-family:var(--ui);font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);font-weight:600}
+.sh-body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 10px 18px}
+
+.toc-item{display:flex;align-items:baseline;gap:12px;width:100%;text-align:left;
+  padding:11px 12px;border-radius:10px}
+.toc-item:active{background:var(--sur2)}
+.toc-item.cur{background:var(--sel)}
+.toc-item .n{font-family:var(--ui);font-size:11px;letter-spacing:.1em;color:var(--dim);
+  flex:0 0 62px;text-transform:uppercase;font-weight:600}
+.toc-item.cur .n{color:var(--acc)}
+.toc-item .l{flex:1;font-size:.93em;line-height:1.35;color:var(--tx);min-width:0}
+.toc-item .c{font-family:var(--ui);font-size:11px;color:var(--dim)}
+
+.srch{display:flex;gap:8px;padding:0 16px 12px}
+.srch input{flex:1;background:var(--sur2);border:1px solid var(--line);border-radius:11px;
+  padding:11px 13px;color:var(--tx);font-family:var(--ui);font-size:16px}
+.srch input::placeholder{color:var(--dim)}
+.res{display:block;width:100%;text-align:left;padding:11px 12px;border-radius:10px}
+.res:active{background:var(--sur2)}
+.res .w{font-family:var(--ui);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--acc);display:block;margin-bottom:3px}
+.res .s{font-size:.9em;line-height:1.45;color:var(--dim)}
+.res .s mark{background:color-mix(in srgb,var(--acc) 28%,transparent);color:var(--tx);
+  border-radius:3px;padding:0 2px}
+.empty{padding:26px 16px;color:var(--dim);font-family:var(--ui);font-size:13px;text-align:center}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 8px}
+.chip{padding:7px 12px;border-radius:999px;background:var(--sur2);border:1px solid var(--line);
+  font-family:var(--ui);font-size:12.5px;color:var(--tx)}
+.chip:active{background:var(--sel)}
+.chip i{font-style:normal;color:var(--dim);margin-left:6px;font-size:11px}
+
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:13px 16px;font-family:var(--ui);font-size:13.5px}
+.set-row + .set-row{border-top:1px solid var(--line)}
+.seg{display:flex;background:var(--sur2);border-radius:9px;padding:3px;gap:3px}
+.seg button{padding:6px 13px;border-radius:7px;font-size:12.5px;color:var(--dim)}
+.seg button.on{background:var(--sel);color:var(--tx);font-weight:600}
+.hint{padding:14px 16px 4px;font-family:var(--ui);font-size:11.5px;color:var(--dim);line-height:1.5}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:60;background:rgba(4,6,10,.94);display:none;
+  align-items:center;justify-content:center;padding:16px}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:88vh;border-radius:8px}
+
+/* ---------- shelf ---------- */
+.shelf{position:fixed;inset:0;z-index:70;background:var(--bg);overflow-y:auto;display:none;
+  padding:0 18px calc(30px + var(--safe-b))}
+.shelf.on{display:block}
+.shelf-in{max-width:44rem;margin:0 auto}
+.shelf h1{font-size:1.9em;line-height:1.15;margin:34px 0 4px;font-weight:600;letter-spacing:-.01em}
+.shelf .sub{font-family:var(--ui);font-size:12px;color:var(--dim);margin-bottom:26px;line-height:1.55}
+.bk{display:block;width:100%;text-align:left;background:var(--sur);border:1px solid var(--line);
+  border-radius:14px;padding:16px 17px;margin-bottom:12px}
+.bk:active{background:var(--sur2)}
+.bk .no{font-family:var(--ui);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
+.bk h2{margin:5px 0 10px;font-size:1.2em;font-weight:600;line-height:1.2}
+.bk .track{height:4px;border-radius:2px;background:var(--sur2);overflow:hidden;margin-bottom:9px}
+.bk .fill{display:block;height:100%;background:var(--acc);width:0}
+.bk .st{display:flex;justify-content:space-between;gap:10px;font-family:var(--ui);font-size:11.5px;color:var(--dim)}
+.bk .st b{color:var(--tx);font-weight:600}
+.shelf .foot{font-family:var(--ui);font-size:11.5px;color:var(--dim);line-height:1.6;margin-top:22px}
+
+/* ---------- progress + resume ---------- */
+.bookbar{display:flex;align-items:center;gap:10px;padding:2px 16px 12px;font-family:var(--ui);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);flex:0 0 auto}
+.bookbar .track{flex:1;height:4px;border-radius:2px;background:var(--sur2);overflow:hidden}
+.bookbar .fill{height:100%;background:var(--acc);width:0;transition:width .3s}
+.toc-item .tick{flex:0 0 18px;text-align:center;color:var(--acc);font-size:13px;opacity:0}
+.toc-item.done .tick{opacity:1}
+.toc-item.done .l{color:var(--dim)}
+.chapend{display:flex;gap:9px;margin:6px 0 10px}
+.chapend button{flex:1;padding:12px;border-radius:11px;background:var(--sur);border:1px solid var(--line);
+  font-family:var(--ui);font-size:13px;color:var(--dim)}
+.chapend button.on{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 45%,var(--line))}
+.toast{position:fixed;left:50%;bottom:calc(78px + var(--safe-b));transform:translate(-50%,14px);
+  z-index:45;background:var(--sur2);border:1px solid var(--line);border-radius:999px;
+  padding:9px 16px;font-family:var(--ui);font-size:12.5px;color:var(--tx);
+  opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <button class="ib" id="bshelf" aria-label="All books"><svg viewBox="0 0 24 24"><path d="M4 5.5h6.5v13H4zM13.5 5.5H20v13h-6.5M13.5 9.5H20M4 9.5h6.5"/></svg></button>
+    <button class="ib" id="btoc" aria-label="Chapters"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></button>
+    <button class="ib" id="bname" aria-label="Names"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 19.5c1.1-3.3 3.6-5 6.5-5s5.4 1.7 6.5 5"/></svg></button>
+    <div class="where"><b id="wtitle">—</b><span id="wsub">—</span></div>
+    <button class="ib" id="bsearch" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
+    <button class="ib" id="bset" aria-label="Reading settings"><svg viewBox="0 0 24 24"><path d="M4 18h7M4 12h12M4 6h16"/><circle cx="16.5" cy="18" r="2.2"/><circle cx="19" cy="12" r="2.2"/></svg></button>
+  </div>
+  <div id="prog"></div>
+</div>
+
+<main id="reader"></main>
+
+<nav class="pager">
+  <div class="pager-in">
+    <button class="pg prev" id="pprev"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span class="t"><b id="prevl">—</b></span></button>
+    <button class="pg next" id="pnext"><span class="t"><b id="nextl">—</b></span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+
+<section class="sheet" id="sh-toc" aria-hidden="true">
+  <div class="grip"></div>
+  <div class="sh-head"><h3>Chapters</h3><button class="ib" id="clearprog" aria-label="Reset progress"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg></button></div>
+  <div class="bookbar"><span id="pcount">0 / 0 read</span><span class="track"><span class="fill" id="pfill"></span></span></div>
+  <div class="sh-body" id="toclist"></div>
+</section>
+
+<section class="sheet" id="sh-search" aria-hidden="true">
+  <div class="grip"></div>
+  <div class="sh-head"><h3>Search this book</h3></div>
+  <div class="srch"><input id="q" type="search" placeholder="Name, place, event…" autocomplete="off" enterkeyhint="search"></div>
+  <div class="sh-body" id="results"><div class="empty">Type to search every scene summary in this guide.</div></div>
+</section>
+
+<section class="sheet" id="sh-names" aria-hidden="true">
+  <div class="grip"></div>
+  <div class="sh-head"><h3 id="nmhead">Who's who</h3><button class="ib" id="nmback" style="display:none" aria-label="All names"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button></div>
+  <div class="sh-body" id="namebody"></div>
+</section>
+
+<section class="sheet" id="sh-set" aria-hidden="true">
+  <div class="grip"></div>
+  <div class="sh-head"><h3>Reading</h3></div>
+  <div class="sh-body">
+    <div class="set-row"><span>Text size</span>
+      <div class="seg"><button id="fsm">A−</button><button id="fsr">Reset</button><button id="fsp">A+</button></div></div>
+    <div class="set-row"><span>Theme</span>
+      <div class="seg" id="thseg"><button data-t="dark">Night</button><button data-t="light">Day</button></div></div>
+    <div class="set-row"><span>Artwork</span>
+      <div class="seg" id="imseg"><button data-i="on">Show</button><button data-i="off">Hide</button></div></div>
+    <div class="hint">Guide written by <b>u/sleepinxonxbed</b> for r/Malazan. This is a phone-readable rebuild of that slide deck — same words, same red-name highlighting, reflowed for a small screen. Tap any red name to see everywhere it appears.<br><br>Read one chapter here <i>after</i> you read that chapter in the novel: later chapters contain spoilers.</div>
+  </div>
+</section>
+
+<div class="shelf" id="shelf"><div class="shelf-in">
+  <h1>Malazan companion guides</h1>
+  <div class="sub">Chapter-by-chapter notes by u/sleepinxonxbed, rebuilt for reading on a phone. Each book keeps its own place.</div>
+  <div id="bklist"></div>
+  <div class="foot">Read a chapter here only after you've read it in the novel — later chapters spoil.</div>
+</div></div>
+<div class="toast" id="toast"></div>
+<div class="lb" id="lb"><img id="lbimg" alt=""></div>
+
+<script>
+let ALLBOOKS = [];          // index.json — metadata only
+const CACHE = {};           // id -> full book data once fetched
+let DATA = null, SECS = [], bi = 0;
+let cur = 0;
+
+/* ---------- saved progress (degrades to memory-only) ---------- */
+const KEY=()=>'malazan-b'+DATA.num;
+let mem={};
+function loadState(){
+  try{const v=localStorage.getItem(KEY()); if(v) return JSON.parse(v);}catch(e){}
+  return mem[DATA.num]||{sec:null,y:0,done:[]};
+}
+function saveState(s){
+  mem[DATA.num]=s;
+  try{localStorage.setItem(KEY(),JSON.stringify(s));localStorage.setItem('malazan-last',bi);}catch(e){}
+}
+let ST={sec:null,y:0,done:[]};
+const isDone=i=>ST.done.indexOf(i)>-1;
+function setDone(i,on){
+  const k=ST.done.indexOf(i);
+  if(on&&k<0) ST.done.push(i);
+  if(!on&&k>-1) ST.done.splice(k,1);
+  saveState(ST); paintProgress();
+}
+function paintProgress(){
+  const total=SECS.length, n=ST.done.length;
+  const pc=document.getElementById('pcount'), pf=document.getElementById('pfill');
+  if(pc) pc.textContent=n+' / '+total+' read';
+  if(pf) pf.style.width=(total?n/total*100:0)+'%';
+  const b=document.getElementById('chdone');
+  if(b){ b.classList.toggle('on',isDone(cur));
+         b.textContent=isDone(cur)?'\u2713 Read':'Mark as read'; }
+}
+let toastT;
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('on');
+  clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('on'),2600);
+}
+
+/* ---------- render ---------- */
+const rd = document.getElementById('reader');
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+
+function renderItems(items){
+  let out='', open=false;
+  const close=()=>{if(open){out+='</ul>';open=false}};
+  for(const it of items){
+    if(it.t==='li'){
+      if(!open){out+='<ul class="b">';open=true}
+      out+=`<li class="l${it.l||0}">${it.html}</li>`;
+    } else {
+      close();
+      if(it.t==='q') out+=`<blockquote>${it.html}</blockquote>`;
+      else if(it.t==='h') out+=`<h3>${it.html}</h3>`;
+      else out+=`<p class="tx">${it.html}</p>`;
+    }
+  }
+  close();
+  return out;
+}
+
+function plates(g){
+  if(!g.length) return '';
+  const one = g.length===1 ? ' one' : '';
+  return `<div class="plates${one}">` + g.map(x=>
+    `<span class="plate"><img loading="lazy" decoding="async" src="${x.f}" alt=""></span>`
+  ).join('') + '</div>';
+}
+
+function scenePrefix(h){
+  const m = h.match(/^\s*(Scene[^()]*)(.*)$/i);
+  if(m) return ['<span class="sc">'+esc(m[1].trim())+'</span>', m[2].replace(/^[\s(]+|[)\s]+$/g,'')];
+  return ['', h];
+}
+
+function nx0(i){return !!SECS[i+1]}
+function render(i, anchor){
+  cur = i;
+  const s = SECS[i];
+  let h = `<div class="chead"><div class="eyebrow">${esc(DATA.title)} · Book ${DATA.num}</div>
+    <h1>${esc(s.label)}</h1>
+    <div class="meta">${s.cards.length} ${s.cards.length===1?'entry':'entries'} · slides ${s.cards[0].p}–${s.cards[s.cards.length-1].p} of the original deck</div></div>`;
+  s.cards.forEach((c,ci)=>{
+    const [pre, rest] = scenePrefix(c.h||'');
+    const head = (c.h||rest) ? `<h2 id="c${ci}">${pre}${esc(rest||c.h)}</h2>` : `<span id="c${ci}"></span>`;
+    h += `<article class="card">${head}${plates(c.g)}${renderItems(c.i)}</article>`;
+  });
+  h += `<div class="chapend"><button id="chdone">Mark as read</button>` +
+       (nx0(i) ? `<button id="chnext">Next: ${esc(SECS[i+1].label)} \u203a</button>` : '') + `</div>`;
+  rd.innerHTML = h;
+  document.getElementById('chdone').onclick=()=>setDone(cur,!isDone(cur));
+  const cn=document.getElementById('chnext');
+  if(cn) cn.onclick=()=>{setDone(cur,true);render(cur+1)};
+  paintProgress();
+  document.getElementById('wtitle').textContent = s.label;
+  document.getElementById('wsub').textContent = DATA.title;
+  const pv = SECS[i-1], nx = SECS[i+1];
+  document.getElementById('pprev').disabled = !pv;
+  document.getElementById('pnext').disabled = !nx;
+  document.getElementById('prevl').textContent = pv ? pv.label : '—';
+  document.getElementById('nextl').textContent = nx ? nx.label : 'The end';
+  location.hash = 'b'+bi+'s'+i + (anchor!=null? '/'+anchor : '');
+  ST.sec=i; ST.y=0; ST.label=s.label; saveState(ST);
+  if(anchor!=null){
+    const el = document.getElementById('c'+anchor);
+    if(el){ el.scrollIntoView(); return; }
+  }
+  window.scrollTo(0,0);
+}
+
+/* ---------- toc ---------- */
+const toclist = document.getElementById('toclist');
+function buildToc(){
+  toclist.innerHTML = SECS.map((s,i)=>{
+    const label = s.kind==='front' ? 'Intro' : s.label.replace(/^Chapter\s+/,'');
+    const first = (s.cards.find(c=>c.h)||{}).h || '';
+    const sub = first.replace(/^\s*Scene[^()]*/i,'').replace(/^[\s(]+|[)\s]+$/g,'') || s.label;
+    return `<button class="toc-item${i===cur?' cur':''}${isDone(i)?' done':''}" data-i="${i}">
+      <span class="tick">\u2713</span><span class="n">${esc(s.kind==='front'?'Intro':(s.key==='pro'?'Prol.':s.key==='epi'?'Epil.':'Ch. '+label))}</span>
+      <span class="l">${esc(sub)}</span><span class="c">${s.cards.length}</span></button>`;
+  }).join('');
+}
+document.getElementById('clearprog').onclick=()=>{
+  ST={sec:null,y:0,done:[]}; saveState(ST); buildToc(); paintProgress(); toast('Progress cleared');
+};
+toclist.addEventListener('click',e=>{
+  const b=e.target.closest('.toc-item'); if(!b) return;
+  render(+b.dataset.i); closeSheets();
+});
+
+/* ---------- sheets ---------- */
+const scrim=document.getElementById('scrim');
+function closeSheets(){
+  document.querySelectorAll('.sheet').forEach(s=>{s.classList.remove('on');s.setAttribute('aria-hidden','true')});
+  scrim.classList.remove('on');
+}
+function openSheet(id){
+  closeSheets();
+  const s=document.getElementById(id); s.classList.add('on'); s.setAttribute('aria-hidden','false');
+  scrim.classList.add('on');
+}
+scrim.addEventListener('click',closeSheets);
+document.getElementById('btoc').onclick=()=>{if(!DATA)return;buildToc();paintProgress();openSheet('sh-toc');
+  const c=toclist.querySelector('.cur'); if(c) c.scrollIntoView({block:'center'})};
+document.getElementById('bsearch').onclick=()=>{if(!DATA)return;openSheet('sh-search');setTimeout(()=>document.getElementById('q').focus(),260)};
+document.getElementById('bset').onclick=()=>openSheet('sh-set');
+document.getElementById('bname').onclick=()=>{if(!DATA)return;showNames();openSheet('sh-names')};
+
+/* ---------- search ---------- */
+let FLAT=[];
+function buildIndex(){ FLAT=[];
+SECS.forEach((s,si)=>s.cards.forEach((c,ci)=>{
+  const txt=((c.h||'')+' '+c.i.map(x=>x.html).join(' ')).replace(/<[^>]+>/g,' ')
+    .replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\s+/g,' ');
+  FLAT.push({si,ci,txt,low:txt.toLowerCase(),label:s.label,head:c.h||''});
+})); }
+const resBox=document.getElementById('results');
+document.getElementById('q').addEventListener('input',e=>{
+  const v=e.target.value.trim().toLowerCase();
+  if(v.length<2){resBox.innerHTML='<div class="empty">Type to search every scene summary in this guide.</div>';return}
+  const hits=[];
+  for(const f of FLAT){
+    const k=f.low.indexOf(v);
+    if(k>-1){hits.push({f,k});if(hits.length>=60)break}
+  }
+  if(!hits.length){resBox.innerHTML='<div class="empty">No match in this book.</div>';return}
+  resBox.innerHTML=hits.map(({f,k})=>{
+    const a=Math.max(0,k-52), snip=f.txt.slice(a,k+120);
+    const hl=esc(snip).replace(new RegExp(esc(v).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'ig'),m=>`<mark>${m}</mark>`);
+    return `<button class="res" data-s="${f.si}" data-c="${f.ci}"><span class="w">${esc(f.label)}${f.head?' · '+esc(f.head.slice(0,44)):''}</span><span class="s">${a>0?'…':''}${hl}…</span></button>`;
+  }).join('');
+});
+resBox.addEventListener('click',e=>{
+  const b=e.target.closest('.res'); if(!b) return;
+  render(+b.dataset.s,+b.dataset.c); closeSheets();
+});
+
+/* ---------- name lens (signature) ---------- */
+const nameBody=document.getElementById('namebody');
+const nmHead=document.getElementById('nmhead'), nmBack=document.getElementById('nmback');
+function showNames(){
+  nmHead.textContent="Who's who"; nmBack.style.display='none';
+  nameBody.innerHTML='<div class="hint" style="padding-top:0">Every name the guide flags in red, most-mentioned first. Tap one to jump to its scenes.</div><div class="chips">'+
+    DATA.names.map((n,i)=>`<button class="chip" data-n="${i}">${esc(n.n)}${n.h.length>1?`<i>${n.h.length}</i>`:""}</button>`).join('')+'</div>';
+}
+function showName(i){
+  const n=DATA.names[i];
+  nmHead.textContent=n.n; nmBack.style.display='grid';
+  nameBody.innerHTML=n.h.map(([si,ci])=>{
+    const c=SECS[si].cards[ci];
+    const txt=c.i.map(x=>x.html).join(' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+    return `<button class="res" data-s="${si}" data-c="${ci}"><span class="w">${esc(SECS[si].label)}${c.h?' · '+esc(c.h.slice(0,40)):''}</span><span class="s">${esc(txt.slice(0,140))}…</span></button>`;
+  }).join('');
+}
+nameBody.addEventListener('click',e=>{
+  const chip=e.target.closest('.chip');
+  if(chip){showName(+chip.dataset.n);nameBody.scrollTop=0;return}
+  const r=e.target.closest('.res');
+  if(r){render(+r.dataset.s,+r.dataset.c);closeSheets()}
+});
+nmBack.onclick=()=>{showNames();nameBody.scrollTop=0};
+
+rd.addEventListener('click',e=>{
+  const s=e.target.closest('.nm'); if(!s) return;
+  const t=s.textContent.trim().toLowerCase().replace(/[ ,.;:’'"()\[\]—-]+$/,'');
+  let i=DATA.names.findIndex(n=>n.n.toLowerCase()===t);
+  if(i<0) i=DATA.names.findIndex(n=>t.includes(n.n.toLowerCase())||n.n.toLowerCase().includes(t));
+  if(i<0) return;
+  showName(i); openSheet('sh-names');
+});
+
+/* ---------- paging + progress ---------- */
+document.getElementById('pprev').onclick=()=>{if(cur>0)render(cur-1)};
+document.getElementById('pnext').onclick=()=>{if(cur<SECS.length-1)render(cur+1)};
+let sT;
+addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-innerHeight;
+  const pct=h>0?Math.min(100,scrollY/h*100):0;
+  document.getElementById('prog').style.width=pct+'%';
+  clearTimeout(sT);
+  sT=setTimeout(()=>{
+    ST.sec=cur; ST.y=Math.round(scrollY); ST.label=SECS[cur].label; saveState(ST);
+    if(pct>92 && !isDone(cur)) setDone(cur,true);
+  },260);
+},{passive:true});
+
+/* ---------- settings ---------- */
+let fs=17;
+const setFs=v=>{fs=Math.max(14,Math.min(24,v));document.documentElement.style.setProperty('--fs',fs+'px')};
+document.getElementById('fsm').onclick=()=>setFs(fs-1);
+document.getElementById('fsp').onclick=()=>setFs(fs+1);
+document.getElementById('fsr').onclick=()=>setFs(17);
+document.getElementById('thseg').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  document.documentElement.dataset.theme=b.dataset.t;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));
+});
+document.getElementById('imseg').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  document.documentElement.dataset.img=b.dataset.i;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));
+});
+document.documentElement.dataset.theme='dark';
+document.documentElement.dataset.img='on';
+document.querySelector('#thseg [data-t="dark"]').classList.add('on');
+document.querySelector('#imseg [data-i="on"]').classList.add('on');
+
+/* ---------- lightbox ---------- */
+const lb=document.getElementById('lb'), lbi=document.getElementById('lbimg');
+rd.addEventListener('click',e=>{
+  const img=e.target.closest('.plate img'); if(!img)return;
+  lbi.src=img.src; lb.classList.add('on');
+});
+lb.onclick=()=>lb.classList.remove('on');
+
+/* ---------- books ---------- */
+function bookState(i){
+  const num=ALLBOOKS[i].num;
+  try{const v=localStorage.getItem('malazan-b'+num); if(v) return JSON.parse(v);}catch(e){}
+  return mem[num]||{sec:null,y:0,done:[]};
+}
+async function fetchBook(i){
+  const meta=ALLBOOKS[i];
+  if(CACHE[meta.id]) return CACHE[meta.id];
+  const r=await fetch(meta.file,{cache:'force-cache'});
+  if(!r.ok) throw new Error('Could not load '+meta.file);
+  const d=await r.json();
+  d.num=meta.num; d.title=meta.title;
+  CACHE[meta.id]=d; return d;
+}
+async function openBook(i, sec, y){
+  toast('Opening \u00b7 '+ALLBOOKS[i].title);
+  let d;
+  try{ d=await fetchBook(i); }
+  catch(e){ toast("This book isn't downloaded yet"); return; }
+  bi=i; DATA=d; SECS=d.secs;
+  ST=bookState(i); if(!Array.isArray(ST.done)) ST.done=[];
+  buildIndex();
+  document.getElementById('shelf').classList.remove('on');
+  const s = sec!=null ? sec : (ST.sec!=null && SECS[ST.sec] ? ST.sec : 0);
+  const yy = y!=null ? y : (sec==null ? (ST.y|0) : 0);
+  render(s);
+  if(yy>0) setTimeout(()=>window.scrollTo(0,yy),60);
+}
+const bklist=document.getElementById('bklist');
+function buildShelf(){
+  bklist.innerHTML=ALLBOOKS.map((b,i)=>{
+    const st=bookState(i), done=(st.done||[]).length, tot=b.chapters;
+    const where = st.sec!=null ? 'Continue \u00b7 '+(st.label||('Chapter '+st.sec)) : 'Start at the beginning';
+    return `<button class="bk" data-b="${i}"><span class="no">Book ${b.num}</span>
+      <h2>${esc(b.title)}</h2>
+      <span class="track"><span class="fill" style="width:${tot?done/tot*100:0}%"></span></span>
+      <span class="st"><b>${esc(where)}</b><span>${done} / ${tot} read</span></span></button>`;
+  }).join('');
+}
+bklist.addEventListener('click',e=>{
+  const b=e.target.closest('.bk'); if(!b) return;
+  openBook(+b.dataset.b);
+});
+document.getElementById('bshelf').onclick=()=>{ closeSheets(); showShelf(); };
+
+/* ---------- boot ---------- */
+function showShelf(){
+  buildShelf();
+  document.getElementById('shelf').classList.add('on');
+  document.getElementById('shelf').scrollTop=0;
+}
+async function boot(){
+  try{
+    const r=await fetch('books/index.json',{cache:'no-cache'});
+    ALLBOOKS=await r.json();
+  }catch(e){
+    document.getElementById('bklist').innerHTML=
+      '<div class="empty">No books found. Check that <b>books/index.json</b> sits next to this page.</div>';
+    document.getElementById('shelf').classList.add('on');
+    return;
+  }
+  const m=(location.hash||'').match(/^#b(\d+)s(\d+)(?:\/(\d+))?/);
+  if(m && ALLBOOKS[+m[1]]){ await openBook(+m[1], +m[2], 0);
+    if(m[3]!=null){ const el=document.getElementById('c'+m[3]); if(el) el.scrollIntoView(); }
+    return; }
+  let last=null;
+  try{last=localStorage.getItem('malazan-last');}catch(e){}
+  if(last!=null && ALLBOOKS[+last] && bookState(+last).sec!=null){
+    await openBook(+last); return;
+  }
+  showShelf();
+}
+if('serviceWorker' in navigator){
+  addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeSheets();lb.classList.remove('on');document.getElementById('shelf').classList.remove('on')}
+  if(e.key==='ArrowRight'&&cur<SECS.length-1)render(cur+1);
+  if(e.key==='ArrowLeft'&&cur>0)render(cur-1);
+});
+boot();
+</script>
+</body>
+</html>
