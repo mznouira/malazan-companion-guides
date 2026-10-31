@@ -42,3 +42,7 @@ removed or credited differently: open an issue.
 Code is MIT-licensed (see LICENSE). Built from the source decks with
 `tools/sync-drive.py`. The reader itself was built with help from AI models;
 the guide text is entirely u/sleepinxonxbed’s.
+
+Typefaces, self-hosted in `fonts/` so they work offline: **Literata** (reading
+text, by TypeTogether for Google) and **Cinzel** (titles, by Natanael Gama),
+both under the SIL Open Font License 1.1 — https://openfontlicense.org

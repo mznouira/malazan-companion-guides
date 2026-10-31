@@ -5,7 +5,7 @@ companion guides to *The Malazan Book of the Fallen*.
 
 **Live:** https://mznouira.github.io/malazan-companion-guides/
 
-- One chapter per screen, large readable type, night and day themes
+- One chapter per screen, large readable type, night, sepia and day themes
 - Tap any highlighted name to see every scene it appears in
 - Full-text search across the whole book
 - Remembers your place per book; chapters tick off as you finish them
@@ -25,6 +25,7 @@ index.html              the whole app (UI + logic, one file)
 sw.js                   offline cache — bump CACHE_VERSION when you change files
 manifest.webmanifest    makes it installable on Android/iOS
 icons/                  app icons
+fonts/                  Literata + Cinzel, self-hosted for offline (SIL OFL)
 books/index.json        the book list — the only file you edit by hand
 books/<n>-<id>.json     one file per book: chapters, scenes, names
 assets/<id>/            that book's artwork

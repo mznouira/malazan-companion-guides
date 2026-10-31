@@ -1,8 +1,9 @@
 /* Malazan guides — offline cache.
    Bump CACHE_VERSION after you add or change any file. */
-const CACHE_VERSION = 'malazan-v3';
+const CACHE_VERSION = 'malazan-v4';
 const SHELL = ['./', './index.html', './manifest.webmanifest',
-               './books/index.json', './icons/icon-192.png', './icons/icon-512.png'];
+               './books/index.json', './icons/icon-192.png', './icons/icon-512.png',
+               './fonts/literata.woff2', './fonts/literata-italic.woff2', './fonts/cinzel.woff2'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_VERSION)
