@@ -5,15 +5,26 @@ const SHELL = ['./', './index.html', './manifest.webmanifest',
                './books/index.json', './icons/icon-192.png', './icons/icon-512.png',
                './fonts/literata.woff2', './fonts/literata-italic.woff2', './fonts/cinzel.woff2'];
 
+/* cache:'reload' skips the browser's HTTP cache, so a fresh deploy is never precached stale */
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_VERSION)
-    .then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
+    .then(c => c.addAll(SHELL.map(u => new Request(u, { cache: 'reload' }))))
+    .then(() => self.skipWaiting()));
 });
 
+/* Only touch our own caches: every github.io project of one user shares this origin.
+   If an older version was cached, this is an update — reload open windows so the
+   new version shows now instead of on the next launch. */
 self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys()
-    .then(ks => Promise.all(ks.filter(k => k !== CACHE_VERSION).map(k => caches.delete(k))))
-    .then(() => self.clients.claim()));
+  e.waitUntil((async () => {
+    const old = (await caches.keys()).filter(k => k.startsWith('malazan-') && k !== CACHE_VERSION);
+    await Promise.all(old.map(k => caches.delete(k)));
+    await self.clients.claim();
+    if (old.length) {
+      const wins = await self.clients.matchAll({ type: 'window' });
+      wins.forEach(w => w.navigate(w.url).catch(() => {}));
+    }
+  })());
 });
 
 /* Books and artwork: cache-first, so a book you have read once stays offline.

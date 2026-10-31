@@ -876,7 +876,10 @@ async function boot(){
     return;
   }
   const m=(location.hash||'').match(/^#b(\d+)s(\d+)(?:\/(\d+))?/);
-  if(m && ALLBOOKS[+m[1]]){ await openBook(+m[1], +m[2], 0);
+  if(m && ALLBOOKS[+m[1]]){
+    /* reopening the chapter you were in (e.g. after an update reload) keeps your scroll position */
+    const sv=bookState(+m[1]);
+    await openBook(+m[1], +m[2], m[3]==null && sv.sec===+m[2] ? (sv.y|0) : 0);
     if(m[3]!=null){ const el=$('c'+m[3]); if(el) el.scrollIntoView(); }
     return; }
   const last=lastBook();
